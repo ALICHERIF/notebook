@@ -1,0 +1,13 @@
+<title>Note Details</title>
+  <!-- Include any CSS styling here -->
+
+  <h1>Note Details</h1>
+
+  <div class="note">
+    <h2><%= @note.title %></h2>
+    <p><%= @note.content %></p>
+    <p><strong>Created At:</strong> <%= @note.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+  </div>
+
+  <!-- Link to go back to the notes index -->
+  <%= link_to "Back to Notes", notes_path %>

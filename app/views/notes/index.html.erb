@@ -1,0 +1,10 @@
+<% @notes.each do |note| %>
+   <div class="note">
+     <h2><%= note.title %></h2>
+     <p><%= note.content %></p>
+     <p><strong>Created At:</strong> <%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+   </div>
+ <% end %>
+
+ <!-- Link to create a new note -->
+ <%= link_to "New Note", new_note_path %>

@@ -8,10 +8,21 @@ class NotesController < ApplicationController
   def new
     @note = Note.new
   end
-
+def create
+@note = Note.new(note_params)
+respond_to do |format|
+if @note.save
+  format.html {redirect_to note_url(@note), notice: "note was created sucessfully"}
+else
+  format.html {render :new, status: :unprocessable_entity}
+end
+end
+end
   private
   def set_note
     @note = Note.find(params[:id])
 end
-
+def note_params
+params.require(:note).permit(:title, :content)
+end
 end

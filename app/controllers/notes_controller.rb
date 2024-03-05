@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update]
+  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
   def index
 @notes = Note.all
   end
@@ -23,17 +24,23 @@ end
 def update
   respond_to do |format|
   if @note.update(note_params)
-    format.html {redirect_to note_url(@note), notice: "note was created sucessfully"}
+    format.html {redirect_to note_url(@note), notice: "note was updated sucessfully"}
   else
     format.html {render :new, status: :unprocessable_entity}
   end
   end
+end
+def destroy
+@note.destroy
+respond_to do |format|
+  format.html { redirect_to notes_url, notice: "note was successfully destroyed"}
+end
 end
   private
   def set_note
     @note = Note.find(params[:id])
 end
 def note_params
-params.require(:note).permit(:title, :content)
+params.require(:note).permit(:title, :content, :user_id)
 end
 end
